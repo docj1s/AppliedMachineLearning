@@ -64,7 +64,11 @@ fit.rf <- randomForest(classe ~., data=subTraining, method="class")
 
 fit.predictionRF <- predict(fit.rf, subTesting, type="class")
 
-confusionMatrix(fit.predictionRF, subTesting$classe)
+cm <- confusionMatrix(fit.predictionRF, subTesting$classe)
+cm
+
+out_of_sample_error <- 1 - cm$overall[1]
+cat("Out of sample error: ", out_of_sample_error*100, "%")
 ```
 
 ## Using the test data with Random Forest
