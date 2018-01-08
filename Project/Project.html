@@ -229,7 +229,8 @@ rpart.plot(fit.dt, main=&quot;Decision Tree&quot;, extra=102, under=TRUE, faclen
 
 fit.predictionRF &lt;- predict(fit.rf, subTesting, type=&quot;class&quot;)
 
-confusionMatrix(fit.predictionRF, subTesting$classe)</code></pre>
+cm &lt;- confusionMatrix(fit.predictionRF, subTesting$classe)
+cm</code></pre>
 <pre><code>## Confusion Matrix and Statistics
 ## 
 ##           Reference
@@ -261,6 +262,9 @@ confusionMatrix(fit.predictionRF, subTesting$classe)</code></pre>
 ## Detection Rate         0.2845   0.1927   0.1725   0.1614   0.1828
 ## Detection Prevalence   0.2850   0.1942   0.1749   0.1628   0.1832
 ## Balanced Accuracy      0.9996   0.9969   0.9932   0.9919   0.9970</code></pre>
+<pre class="r"><code>out_of_sample_error &lt;- 1 - cm$overall[1]
+cat(&quot;Out of sample error: &quot;, out_of_sample_error*100, &quot;%&quot;)</code></pre>
+<pre><code>## Out of sample error:  0.6117247 %</code></pre>
 <div id="using-the-test-data-with-random-forest" class="section level2">
 <h2>Using the test data with Random Forest</h2>
 <pre class="r"><code>#testing &lt;- read.csv(&quot;pml-testing.csv&quot;, na.strings=c(&quot;NA&quot;, &quot;#DIV/0!&quot;, &quot;&quot;))
